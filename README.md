@@ -20,3 +20,14 @@ const (
 )
 ```
 Start the server by using `go run`, `go build` or `go install`, whatever you prefer.
+
+If you decide to active `UploadUnknownSamples` make sure to up the time a Holmes-Totem request may run
+in your `WorkActor.scala`:
+```scala
+val config = new AsyncHttpClientConfig.Builder()
+  .setRequestTimeout( 500 ) //up this to _at_least_ 5.1min
+  .setExecutorService(execServ)
+  .setAllowPoolingConnections(true)
+  .setConnectTimeout( 500 )
+  .setIOThreadMultiplier(4).build()
+```
